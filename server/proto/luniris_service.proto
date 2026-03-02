@@ -1,0 +1,136 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+
+// =============================================================================
+// Eye Position Service
+// =============================================================================
+service EyePositionService {
+  // Receive in real-time the eye coordinates update
+  rpc StreamEyeCoordinatesToClient (google.protobuf.Empty) returns (stream EyeCoordinates);
+
+  // Send eye coordinates
+  rpc SendEyeCoordinates (EyeCoordinates) returns (google.protobuf.Empty);
+
+  // Streams eye coordinates to the server
+  rpc StreamEyeCoordinatesToServer (stream EyeCoordinates) returns (google.protobuf.Empty);
+
+  // Receive in real-time the eyelid state update
+  rpc StreamEyelidStateToClient (google.protobuf.Empty) returns (stream EyelidState);
+
+  // Send eyelid update
+  rpc SendEyelidState (EyelidState) returns (google.protobuf.Empty);
+}
+
+message EyeCoordinates {
+  float x = 1;
+  float y = 2;
+}
+
+message EyelidState {
+  float closure_percentage = 1;
+}
+
+// =============================================================================
+// IMU Service
+// =============================================================================
+service ImuService {
+  rpc StreamGyroscopeValues (google.protobuf.Empty) returns (stream InertialMeasurementValues);
+  rpc StreamAccelerometerValues (google.protobuf.Empty) returns (stream InertialMeasurementValues);
+  rpc StreamTemperatureValues (google.protobuf.Empty) returns (stream TemperatureValue);
+}
+
+message InertialMeasurementValues {
+  float x = 1;
+  float y = 2;
+  float z = 3;
+}
+
+message TemperatureValue {
+  float temperature = 1;
+}
+
+// =============================================================================
+// Display Service
+// =============================================================================
+service DisplayService {
+  rpc GetBrightnessLevel (google.protobuf.Empty) returns (BrightnessMessage);
+  rpc SendBrightnessLevel (BrightnessMessage) returns (google.protobuf.Empty);
+}
+
+message BrightnessMessage {
+  int32 brightness_level = 1;
+}
+
+// =============================================================================
+// Actions Service
+// =============================================================================
+service ActionsService {
+  rpc GetRegisteredActions (google.protobuf.Empty) returns (Actions);
+  rpc StreamActions (google.protobuf.Empty) returns (stream ActionMessage);
+  rpc SendAction (ActionMessage) returns (google.protobuf.Empty);
+}
+
+message ActionMessage {
+  string key = 1;
+  string argument = 2;
+}
+
+message Action {
+  string key = 1;
+  string name = 2;
+  string description = 3;
+  bool is_available = 4;
+  ActionSource source = 5;
+}
+
+message Actions {
+  repeated Action actions = 1;
+}
+
+enum ActionSource {
+  ACTION_SOURCE_RESOURCE_PACK = 0;
+  ACTION_SOURCE_FEATURE = 1;
+}
+
+// =============================================================================
+// Parameters Service
+// =============================================================================
+service ParametersService {
+  // Retrieves the current value of a parameter
+  rpc GetParameterValue (Parameter) returns (Parameter);
+
+  // Updates a parameter value
+  rpc SetParameterValue (Parameter) returns (Parameter);
+
+  // Streams real-time parameter updates
+  rpc StreamParameterUpdates (google.protobuf.Empty) returns (stream Parameter);
+}
+
+// Parameter key-value pair
+message Parameter {
+  string key = 1;    // Parameter identifier (from settings.manifest.json)
+  string value = 2;  // Current parameter value (always string)
+}
+
+// =============================================================================
+// LED Service
+// =============================================================================
+service LedService {
+  // Streams LED color settings with priority control
+  rpc StreamLedSettings (stream LedSettings) returns (google.protobuf.Empty);
+}
+
+// RGB color definition (0-255)
+message Color {
+  int32 r = 1;
+  int32 g = 2;
+  int32 b = 3;
+}
+
+// LED color and priority configuration
+message LedSettings {
+  Color left_led = 1;
+  Color right_led = 2;
+  int32 priority_level = 3;
+  optional bool is_active = 4;
+}

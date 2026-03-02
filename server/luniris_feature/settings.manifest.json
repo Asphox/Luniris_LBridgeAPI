@@ -1,0 +1,29 @@
+{
+   "parameters": [
+    {
+      "name": "lbridge_port",
+      "content": "26400"
+    },
+    {
+      "name": "lbridge_secure_key",
+      "content": ""
+    }
+   ],
+   "sections": [
+      {
+         "label": "Configuration",
+         "inputs": [
+          {
+            "label": "Port",
+            "parameterName": "lbridge_port",
+            "type": "numberInput"
+          },
+          {
+            "label": "Secure Key (optional)",
+            "parameterName": "lbridge_secure_key",
+            "type": "stringInput"
+          }
+         ]
+      }
+   ]
+}

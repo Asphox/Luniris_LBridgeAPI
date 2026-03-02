@@ -1,0 +1,25 @@
+# =============================================================================
+# Luniris Server Build Image (ARM64) - Alpine Static Build
+# =============================================================================
+# Alternative: Alpine with musl - better for static builds
+# =============================================================================
+FROM alpine:3.18
+
+# Install build dependencies
+RUN apk add --no-cache \
+    build-base \
+    cmake \
+    pkgconfig \
+    git \
+    linux-headers \
+    grpc-dev \
+    protobuf-dev \
+    c-ares-dev \
+    re2-dev \
+    openssl-dev \
+    zlib-dev \
+    abseil-cpp-dev
+
+WORKDIR /workspace
+
+CMD ["sh", "-c", "mkdir -p build && cd build && cmake .. -DLUNIRIS_SERVER_STATIC=OFF && cmake --build . -j$(nproc)"]
