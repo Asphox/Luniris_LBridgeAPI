@@ -140,10 +140,10 @@ bool LunirisLBridgeServer::init()
 
     if (!secure_key_str.empty())
     {
-        uint8_t key[32] = {};
-        size_t copy_len = std::min(secure_key_str.size(), static_cast<size_t>(12));
-        std::memcpy(key, secure_key_str.data(), copy_len);
-        lbridge_activate_encryption(lbridge_srv_, key);
+        std::memset(encryption_key_, 0, sizeof(encryption_key_));
+        size_t copy_len = std::min(secure_key_str.size(), static_cast<size_t>(32));
+        std::memcpy(encryption_key_, secure_key_str.data(), copy_len);
+        lbridge_activate_encryption(lbridge_srv_, encryption_key_);
         server_log(false, "Encryption enabled (key truncated to %zu bytes)\n", copy_len);
     }
     else

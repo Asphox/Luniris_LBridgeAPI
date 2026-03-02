@@ -37,6 +37,9 @@ option(LUNIRIS_ENABLE_SECURE "Enable LBridge encryption (ChaCha20-Poly1305)" ON)
 option(LUNIRIS_STATIC_BUILD "Build fully static executable" OFF)
 option(LUNIRIS_ENABLE_LBRIDGE_LOG "Enable LBridge logging (all levels)" OFF)
 
+# Propagate encryption option to LBridge
+set(LBRIDGE_ENABLE_SECURE ${LUNIRIS_ENABLE_SECURE} CACHE BOOL "" FORCE)
+
 # =============================================================================
 # Static build configuration
 # =============================================================================
@@ -71,7 +74,6 @@ if(LUNIRIS_SERVER_STANDALONE)
     set(LBRIDGE_SRC_DIR "${LUNIRIS_ROOT}/external/LBridge")
     if(EXISTS "${LBRIDGE_SRC_DIR}/CMakeLists.txt")
         set(LBRIDGE_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-        set(LBRIDGE_ENABLE_SECURE ${LUNIRIS_ENABLE_SECURE} CACHE BOOL "" FORCE)
         add_subdirectory("${LBRIDGE_SRC_DIR}" "${CMAKE_BINARY_DIR}/lbridge")
     else()
         message(FATAL_ERROR "LBridge not found at ${LBRIDGE_SRC_DIR}. Run: git submodule update --init")

@@ -1,7 +1,7 @@
 {
    "id": "2400be96-42b4-493b-968c-221b905475c4",
    "authors": "Asphox",
-   "version": "0.1.1",
+   "version": "0.1.2",
    "minimalApiVersion": "1.0.0",
    "name": "Luniris API LBridge",
    "description": "Expose the internal Luniris API through LBridge protocol",

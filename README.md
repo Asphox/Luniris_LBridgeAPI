@@ -48,6 +48,18 @@ From here, you can:
 
 > **Important:** Any configuration change requires a restart of the feature to take effect.
 
+## Building from Source
+
+Pre-built binaries are provided in the [releases](https://github.com/Asphox/Luniris_LBridgeAPI/releases) and are the recommended way to install this feature.
+
+Building from source is possible but **not recommended**. The feature must be compiled as a fully static binary to avoid any dependency on the Luniris system's shared libraries, whose versions are not guaranteed. This means building libc, Abseil, gRPC, and all other dependencies statically — a process that is extremely slow and non-trivial to set up.
+
+If you still want to build from source, a build script is provided:
+
+```bash
+./build_server.sh
+```
+
 ## Client Library
 
 To connect to the Luniris API LBridge server from your application, use the official client library:

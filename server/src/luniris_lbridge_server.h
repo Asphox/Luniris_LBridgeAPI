@@ -64,6 +64,7 @@ private:
     struct lbridge_context* lbridge_ctx_;
     struct lbridge_server* lbridge_srv_;
     std::atomic<bool> running_;
+    uint8_t encryption_key_[32];
 
     // Static instance pointer for callback routing
     static LunirisLBridgeServer* s_instance;
