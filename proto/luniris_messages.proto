@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+// Messages for Eye Position API (nanopb compatible)
+// Services are handled by the LBridge RPC layer, not protobuf
+
+// Normalized eye coordinates (-1 to 1)
+message EyeCoordinates {
+  float x = 1; // Horizontal position (-1: left, 1: right)
+  float y = 2; // Vertical position (-1: down, 1: up)
+}
+
+// Eyelid closure state (0 to 1)
+message EyelidState {
+  float closure_percentage = 1; // 0: fully open, 1: fully closed
+}

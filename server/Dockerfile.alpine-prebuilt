@@ -1,0 +1,32 @@
+# =============================================================================
+# Luniris Server Build Image (ARM64) - Alpine with prebuilt gRPC
+# =============================================================================
+# Uses Alpine's prebuilt gRPC packages - much faster build
+# =============================================================================
+FROM alpine:3.19
+
+# Install build dependencies + prebuilt gRPC
+RUN apk add --no-cache \
+    build-base \
+    cmake \
+    pkgconfig \
+    git \
+    linux-headers \
+    # Prebuilt gRPC and dependencies
+    grpc-dev \
+    grpc-cpp \
+    protobuf-dev \
+    protoc \
+    c-ares-dev \
+    c-ares-static \
+    zlib-dev \
+    zlib-static \
+    re2-dev \
+    re2-static \
+    openssl-dev \
+    openssl-libs-static \
+    abseil-cpp-dev
+
+WORKDIR /workspace
+
+CMD ["sh", "-c", "rm -rf server/build && mkdir -p server/build && cd server/build && cmake .. && cmake --build . -j$(nproc)"]

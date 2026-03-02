@@ -1,0 +1,9 @@
+[submodule "external/LBridge"]
+	path = external/LBridge
+	url = https://github.com/Asphox/LBridge.git
+[submodule "external/nanopb"]
+	path = external/nanopb
+	url = https://github.com/nanopb/nanopb.git
+[submodule "client"]
+	path = client
+	url = https://github.com/Asphox/Luniris_LBridgeClient.git

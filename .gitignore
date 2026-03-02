@@ -1,0 +1,21 @@
+# Build directories
+build/
+out/
+cmake-build-*/
+
+# IDE
+.vs/
+.vscode/
+*.user
+*.suo
+*.sln
+*.vcxproj
+*.vcxproj.filters
+
+# Generated files
+*.pb.c
+*.pb.h
+
+# OS
+.DS_Store
+Thumbs.db
