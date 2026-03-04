@@ -60,6 +60,20 @@ If you still want to build from source, a build script is provided:
 ./build_server.sh
 ```
 
+## Toybox
+
+A testing application is available to quickly try out the API without writing any code. The Toybox lets you:
+
+- Control eye position and eyelid state
+- View real-time IMU data (gyroscope, accelerometer) as graphs
+- Monitor temperature
+- Trigger registered actions
+- Adjust display brightness
+
+Download `luniris_toybox.exe` from the [latest release](https://github.com/Asphox/Luniris_LBridgeAPI/releases).
+
+> **Note:** The Toybox is currently only available for Windows x64.
+
 ## Client Library
 
 To connect to the Luniris API LBridge server from your application, use the official client library:
